@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="photo-selection-wrapper">
+                <div ng-repeat="photoModel in cart">
+                    <div class="photo-selection">
+                        <div class="photo-image">
+                            <img ng-src="{{photoModel.photo.src}}" width="100%">
+                        </div>
+                        <div class="photo-details">
+                            <div class="title">Naziv:</div>
+                            <div class="title">{{photoModel.photo.naziv}}</div>
+                            <div class="details" style="height: 72px; padding-top: 7px;">Kategorija: </br> {{photoModel.photo.kategorijaIme}}</div>
+                            <div class="details" style="height: 72px; padding-top: 7px;">Prodavac: </br> {{photoModel.photo.prodavacIme}}</div>
+                            <div class="details" style="height: 72px; padding-top: 7px;">Cena: </br> {{photoModel.resolution.cena}}</div>
+                            <button type="button" class="ml-5 mb-5 btn btn-danger" ng-click="delete(photoModel.photo.id)">Obrisi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <span>Total: </span>
+        <input type="number" disabled ng-model="total">
+        <button type="button" class="ml-5 mb-5 btn btn-default" ng-click="buy()" ng-show="$cart.length != 0">Kupi</button>
+    </div>
+
+</div>

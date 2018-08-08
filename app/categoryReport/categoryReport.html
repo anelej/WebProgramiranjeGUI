@@ -1,0 +1,27 @@
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12" style="margin-top: 8px;">
+                <table class="table compact table-hover dataTable table-striped" ng-style="setFullHeight()" data-full-height>
+                    <thead class="ui-grid-disable-selection">
+                        <tr>
+                            <th>Kategorija</th>
+                            <th>Broj prodatih slika</th>
+                            <th>Najcesca rezolucija</th>
+                            <th>Prosecna cena</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="category in gridOptions.categories" ng-class="{'success': entity.isSelected}">
+                            <td>{{category.naziv}}</td>
+                            <td>{{category.brojProdatihSlika}}</td>
+                            <td>{{category.najcescaRezolucija}}</td>
+                            <td>{{category.prosecnaCena}}</td>
+                        </tr>
+                        <tr class="full-height-row">
+                            <td colspan="4"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

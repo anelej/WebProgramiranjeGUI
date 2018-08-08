@@ -1,0 +1,40 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6" style="margin-top: 8px;">
+            <table class="table compact table-hover dataTable table-striped" ng-style="setFullHeight()" data-full-height>
+                <thead class="ui-grid-disable-selection">
+                    <tr>
+                        <th style="cursor:pointer" ng-click="gridOptions.sortClick($event, 'fullName')">Naziv
+                            <span ng-class="gridOptions.getAscDescClass('fullName')"></span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="entity in gridOptions.categories" ng-click="onCategoryClick(entity)" ng-class="{'success': entity.isSelected}">
+                        <td>{{entity.naziv}}</td>
+                    </tr>
+                    <tr class="full-height-row">
+                        <td colspan="4"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-lg-6" style="padding-top: 6px; padding-left: 10px;">
+            <div class="col-lg-12">
+                <div class="panel panel-default" ng-style="setFullHeight(18)" data-full-height style="overflow-y: auto;">
+                    <div class="panel-heading">
+                        <button class="btn btn-primary" ng-click="addNewCategory()">Dodaj novu kategoriju</button>
+                        <button class="btn btn-success" ng-click="save()">Sacuvaj</button>
+                    </div>
+                    <div class="panel-body" style="padding-bottom:0;padding-top:0">
+                        <div class="form-group">
+                            <label>Naziv</label>
+                            <input type="text" ng-model="newCategory.naziv" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

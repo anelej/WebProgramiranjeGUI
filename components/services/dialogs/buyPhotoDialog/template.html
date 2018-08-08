@@ -1,0 +1,78 @@
+<div class="modal-header">
+    <h3>{{photo.naziv}}</h3>
+</div>
+<div class="modal-footer">
+    <div class="col-lg-8" style="text-align: left;">
+        <div class="photo-image">
+            <img ng-src="{{photo.src}}" width="100%">
+        </div>
+    </div>
+    <div class="col-lg-4" style="text-align: left;">
+        <div class="form-group">
+            <label>Naziv</label>
+            <input type="text" ng-model="photo.naziv" class="form-control" disabled/>
+        </div>
+        <div class="form-group">
+            <label>Kategorija</label>
+            <input type="text" ng-model="photo.kategorijaIme" class="form-control" disabled/>
+        </div>
+        <div class="form-group">
+            <label>Prodavac</label>
+            <input type="text" ng-model="photo.prodavacIme" class="form-control" disabled/>
+        </div>
+        <div class="form-group">
+            <label>Keyword</label>
+            <input type="text" ng-model="photo.keywords" class="form-control" disabled/>
+        </div>
+        <div class="form-group">
+            <label>Ocena</label>
+            <input type="number" ng-model="photo.ocena" class="form-control" disabled/>
+        </div>
+        <div class="form-group">
+            <label>Rezolucija</label>
+            <select ng-model="selectedResolution" ng-options="resolution.rezolucija for resolution in photo.listaRezolucija" ng-change="onResolutionChange()"
+                class="form-control"></select>
+            <input type="text" ng-model="selectedResolution.cena" class="form-control" disabled/>
+        </div>
+
+        <div class="form-group" ng-if="!userBoughtPhoto">
+            <div class="form-group">
+                <label class="radio">
+                    <input type="radio" name="status" ng-click="modalOptions.useExistingCard(true)" style="margin-left: 3px">
+                    <div style="margin-left: 25px;">Postojeca kartica</div>
+                </label>
+                <label class="radio">
+                    <input type="radio" name="status" ng-click="modalOptions.useExistingCard(false)" style="margin-left: 3px" checked="checked">
+                    <div style="margin-left: 25px;">Nova kartica</div>
+                </label>
+            </div>
+            <div ng-show="!useExistingCard">
+                <input type="text" ng-model="buyPhotoModel.card" class="form-control" />
+            </div>
+            <div ng-show="useExistingCard">
+                <select ng-model="selectedCard" ng-change="onCardChange()" ng-options="card.brojKartice for card in gridOptions.cards" class="form-control"></select>
+            </div>
+        </div>
+
+        <div class="form-group" ng-if="userBoughtPhoto">
+            <label>Tvoja ocena</label>
+            <input type="text" ng-model="photo.fotografijaOcena" class="form-control" />
+        </div>
+    </div>
+    <button class="btn btn-success" style="margin-right: 5px;" data-ng-click="modalOptions.rate();" ng-if="userBoughtPhoto">
+        Oceni
+    </button>
+    <button class="btn btn-success" style="margin-right: 5px;" data-ng-click="modalOptions.sendPhotoOnMail();" ng-if="userBoughtPhoto">
+        Posalji na mail ponovo
+    </button>
+    <button class="btn btn-danger" style="margin-right: 5px;" data-ng-click="modalOptions.deletePhoto();" ng-if="userId == photo.prodavacId">
+        Obrisi
+    </button>
+    <button class="btn btn-success" ng-disabled="buyPhotoModel.card == '' || buyPhotoModel.resolution == ''" 
+        style="margin-right: 5px;" data-ng-click="modalOptions.buy();" ng-if="!userBoughtPhoto && userId != photo.prodavacId">
+        Kupi
+    </button>
+    <button id="btnOk" class="btn btn-primary" style="margin-right: 5px;" data-ng-click="modalOptions.close();">
+        Odustani
+    </button>
+</div>

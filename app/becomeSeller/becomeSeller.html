@@ -1,0 +1,35 @@
+<div class="row">
+    <label>
+        Ukoliko zelite da prodajete fotografije nekoj firmi, odaberite je:
+    </label>
+    <select ng-model="selectedCompany" ng-change="onCompanyChange()" ng-options="company.ime for company in gridOptions.companies" ></select>
+
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="photo-selection-wrapper">
+            <div ng-repeat="photo in gridOptions.photos">
+                <div class="photo-selection">
+                    <div class="photo-image">
+                        <img ng-src="{{photo.src}}" width="100%">
+                    </div>
+                    <div class="photo-details">
+                        <div class="details">
+                            <button type="button" class="ml-5 mb-5 btn btn-danger" ng-disabled="!photo.canDelete" ng-click="delete(photo)">Obrisi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <label class="btn btn-primary" ng-disabled="gridOptions.photos.length >= 10">
+        Postavi sliku
+        <input type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" ng-hide="true" ng-disabled="gridOptions.photos.length >= 10"
+            multiple/>
+    </label>
+    <!-- <button type="button" class="ml-5 mb-5 btn btn-primary" ng-click="add()" ng-disabled="gridOptions.photos.length >= 10">Dodaj</button> -->
+    <button type="button" class="ml-5 mb-5 btn btn-success" ng-click="sendForApproval()" ng-disabled="gridOptions.photos.length < 10 || alreadySent">Posalji</button>
+</div>

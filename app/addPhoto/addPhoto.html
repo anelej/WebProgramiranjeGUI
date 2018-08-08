@@ -1,0 +1,51 @@
+<div class="container-fluid">
+    <div class="row" style="display: flex; flex-direction: row;">
+        <div class="col-lg-4">
+            <div style="width: 500px; margin: 5px; float: left;">
+                <img class="thumb" ng-src="{{newPhoto.src}}" style="width: 463px; margin: 5px; float: left;" />
+            </div>
+        </div>
+
+        <div class="col-lg-6" style="flex-direction: column;">
+            <div class="panel-body col-lg-12">
+                <fieldset>
+                    <div class="form-group">
+                        <label>
+                            Naziv
+                        </label>
+                        <input class="form-control" type="text" ng-model="newPhoto.naziv">
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Mesto
+                        </label>
+                        <input class="form-control" type="text" ng-model="newPhoto.mesto">
+                    </div>
+                    <div class="form-group">
+                        <label>Kategorija</label>
+                        <select ng-model="selectedCategory" ng-change="onCategoryChange()" ng-options="category.naziv for category in gridOptions.categories"
+                            class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            Keyword
+                        </label>
+                        <input class="form-control" type="text" ng-model="newPhoto.keywords">
+                    </div>
+                    <div class="form-group">
+                        <label class="checkbox" ng-repeat="resolution in listaRezolucija">
+                            <input type="checkbox" style="margin-left: 3px;" ng-model="resolution.isChecked" ng-change="toggleResolution(resolution)" />
+                            <span style="margin-left: 26px;">{{ resolution.rezolucija }}</span>
+                            <input class="form-control" type="number" ng-model="resolution.cena" ng-disabled="!resolution.isChecked">
+                        </label>
+                    </div>
+                    <label class="btn btn-primary">
+                        Postavi sliku
+                        <input type='file' ng-model-instant onchange="angular.element(this).scope().imageUpload(event)" ng-hide="true" />
+                    </label>
+                    <button class="btn btn-success" ng-disabled="!newPhoto.src" ng-click="save()">Sacuvaj</button>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+﻿.loginErrorMessage {
+    color: red;
+}
+
+.loginPanel {
+    width: 300px;
+    height: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* the image is 50x57, so we use negative margins of 1/2 that size to center it*/
+    margin: -100px 0 0 -150px;
+}
+
+#page-wrapper {
+    margin-left: 0;
+}

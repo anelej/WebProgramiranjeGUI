@@ -1,0 +1,75 @@
+﻿<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <form ng-submit="searchClick()" class="panel-body">
+                <input type="submit" style="position: absolute; left: -9999px" />
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Naziv</label>
+                        <input type="text" ng-model="searchPhoto.naziv" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Prodavac</label>
+                        <select ng-model="selectedSeller" ng-change="onSellerChange()" ng-options="seller.username for seller in gridOptions.sellers"
+                            class="form-control"></select>
+                    </div>
+                    <div class="col-md-1">
+                        <label>Keyword</label>
+                        <input type="text" ng-model="searchPhoto.keyword" class="form-control" />
+                    </div>
+                    <div class="col-md-2">
+                        <label>Kategorija</label>
+                        <select ng-model="selectedCategory" ng-change="onCategoryChange()" ng-options="category.naziv for category in gridOptions.categories"
+                            class="form-control"></select>
+                    </div>
+                    <div class="col-md-2">
+                        <label>Sortiraj po</label>
+                        <div style="display: flex; flex-direction: row;">
+                            <select ng-model="selectedSortOrder" ng-change="onSortOrderChange()" ng-options="sortOrder.name for sortOrder in gridOptions.sortOrder"
+                                class="form-control" style="width: 100px"></select>
+                            <select ng-model="selectedSortDirection" ng-change="onSortDirectionChange()" ng-options="sortDirection.name for sortDirection in gridOptions.sortDirection"
+                                class="form-control" style="width: 100px"></select>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <label>Kupljene fotografije</label>
+                        <input type="checkbox" ng-model="searchPhoto.kupljeneFotografije" />
+                    </div>
+                    <div class="col-md-2">
+                        <div class="mt-25">
+                            <button type="button" class="ml-5 mb-5 btn btn-primary" ng-click="searchClick()">Pretrazi</button>
+                            <button type="button" class="ml-5 mb-5 btn btn-default" ng-click="clear()">Obrisi</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="photo-selection-wrapper">
+                <div ng-repeat="photo in gridOptions.photos">
+                    <div class="photo-selection">
+                        <div class="photo-image" ng-click="openPhoto(photo.id)">
+                            <img ng-src="{{photo.src}}" width="100%">
+                        </div>
+                        <div class="photo-details">
+                            <div class="title">Naziv:</div>
+                            <div class="title">{{photo.naziv}}</div>
+                            <div class="details">Kategorija: </br> {{photo.kategorija}}</div>
+                            <div class="details">Prodavac: </br> {{photo.prodavacIme}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <button type="button" class="ml-5 mb-5 btn btn-default" ng-click="previousPage()" ng-disabled="searchPhoto.page == 1 || gridOptions.photos.length == 0">
+            < Prethodna</button>
+                <input type="number" ng-model="searchPhoto.pageSize" style="width: 40px;" />
+                <button type="button" class="ml-5 mb-5 btn btn-default" ng-click="nextPage()" ng-disabled="gridOptions.photos.length == 0">Slececa ></button>
+    </div>
+</div>

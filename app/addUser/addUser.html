@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <div class="col-lg-6" style="flex-direction: column;">
+        <div class="panel-body col-lg-12">
+            <fieldset>
+                <div class="form-group">
+                    <label>
+                        Username
+                    </label>
+                    <input class="form-control" type="text" ng-model="newUser.username">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Password
+                    </label>
+                    <input class="form-control" type="text" ng-model="newUser.password">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Email
+                    </label>
+                    <input class="form-control" type="text" ng-model="newUser.email">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Drzava
+                    </label>
+                    <select ng-model="selectedCountry" ng-change="onCountryChange()" ng-options="country.naziv for country in gridOptions.countries"
+                        class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Uloga
+                    </label>
+                    <select ng-model="selectedRole" ng-change="onRoleChange()" ng-options="role.naziv for role in gridOptions.roles"
+                        class="form-control"></select>
+                </div>
+                <button class="btn btn-primary" ng-click="addUser()">Prijavi se</button>
+            </fieldset>
+        </div>
+    </div>
+</div>
+</div>

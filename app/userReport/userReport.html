@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <form ng-submit="searchClick()" class="panel-body">
+                <input type="submit" style="position: absolute; left: -9999px" />
+                <div class="row">
+                    <div class="col-md-2">
+                        <label>Korisnik</label>
+                        <select ng-model="selectedUser" ng-change="onUserChange(selectedUser.id)" ng-options="user.username for user in gridOptions.users"
+                            class="form-control" style="width: 300px;"></select>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-lg-12">
+            <table class="table compact table-hover dataTable table-striped" ng-style="setFullHeight()" data-full-height>
+                <thead class="ui-grid-disable-selection">
+                    <tr>
+                        <th style="width: 100px;">Broj reda</th>
+                        <th>Naziv fotografija</th>
+                        <th>Rezolucija</th>
+                        <th>Cena</th>
+                        <th>Datum kupovine</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="photo in gridOptions.photos" ng-class="{'success': entity.isSelected}">
+                        <td>{{ $index + 1 }}</td>
+                        <td>{{photo.fotografijaNaziv}}</td>
+                        <td>{{photo.rezolucija}}</td>
+                        <td>{{photo.cena}}</td>
+                        <td>{{photo.datumKupovineString}}</td>
+                    </tr>
+                    <tr class="full-height-row">
+                        <td colspan="4"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

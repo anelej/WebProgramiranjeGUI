@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6" style="margin-top: 8px;">
+            <table class="table compact table-hover dataTable table-striped" ng-style="setFullHeight()" data-full-height>
+                <thead class="ui-grid-disable-selection">
+                    <tr>
+                        <th>Username</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in gridOptions.users" ng-click="openUserPhotos(user)" ng-class="{'success': entity.isSelected}">
+                        <td>{{user.username}}</td>
+                    </tr>
+                    <tr class="full-height-row">
+                        <td colspan="4"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-lg-6" style="padding-top: 6px; padding-left: 10px;" ng-show="selectedUser.id">
+            <div class="col-lg-12">
+                <div class="panel panel-default" ng-style="setFullHeight(18)" data-full-height style="overflow-y: auto;">
+                    <div class="panel-heading">
+                        <button class="btn btn-success" ng-click="passExam(selectedUser)" ng-disabled="!userPass">Prosao test</button>
+                        <button class="btn btn-danger" ng-click="failExam(selectedUser)" ng-disabled="userPass">Pao test</button>
+                        <input type="number" ng-model="average" class="form-control" />
+                    </div>
+                    <div class="panel-body" style="padding-bottom: 15px; padding-top:0">
+                        <div class="form-group" ng-repeat="photo in gridOptions.photos" style="margin-top: 10px">
+                            <div class="photo-image col-lg-8" style="margin-top: 15px;">
+                                <img ng-src="{{photo.src}}" width="100%">
+                            </div>
+                            <input type="text" ng-model="photo.ocena" ng-change="calculateAverage()" class="form-control col-lg-4" style="display: inline-block; width: 150px; margin-top: 15px;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

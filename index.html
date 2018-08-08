@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" class="no-js" ng-controller="appController">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>My AngularJS App</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/css/app.css" rel="stylesheet">
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+
+    <script src="app/appController.js"></script>
+
+    <script src="assets/js/jquery-2.1.1.js"></script>
+    <script src="assets/js/jquery-ui.js"></script>
+
+</head>
+
+<body>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" style="margin-bottom: 0;" ng-show="isLoggedIn">
+            <div class="navbar-header">
+                <h2 style="float: left; display: inline;">{{test}}</h2>
+            </div>
+            <!-- /.navbar-header -->
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <a href="#/cart">
+                        <i class="fa fa-shopping-cart fa-fw"></i> Korpa
+                    </a>
+                </li>
+                <li>
+                    <a href="#/changePassword">
+                        <i class="fa fa-key fa-fw"></i> Promeni password
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="deactivate()">
+                        <i class="fa fa-minus-circle fa-fw"></i> Deaktiviraj nalog
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="logout()" href="#/login">
+                        <i class="fa fa-sign-out fa-fw"></i>Odjavi se
+                    </a>
+                </li>
+            </ul>
+            <div class="collapsablePanel">
+                <div title="test" class="sidePanelPulloutIcon" ng-click="isSideBarHidden = !isSideBarHidden" ng-class="{contentNoLeft: isSideBarHidden}">
+                </div>
+                <div class="navbar-default sidebar" role="navigation" ng-hide="isSideBarHidden">
+                    <div class="sidebar-nav navbar-collapse">
+                        <ul class="nav" id="side-menu">
+                            <li>
+                                <a class-when-active="active" href="#/default">
+                                    <i class="fa fa-home fa-fw"></i> Početna
+                                </a>
+                            </li>
+                            <li>
+                                <a class-when-active="active" href="#/photoSearch">
+                                    <i class="fa fa-image fa-fw"></i> Pretraga fotografija
+                                </a>
+                            </li>
+                            <li>
+                                <a class-when-active="active" href="#/addPhoto" ng-if="role > 0">
+                                    <i class="fa fa-camera fa-fw"></i> Dodaj novu fotografiju
+                                </a>
+                            </li>
+                            <li>
+                                <a class-when-active="active" href="#/addCategory" ng-if="role > 2">
+                                    <i class="fa fa-plus fa-fw"></i> Dodaj kategoriju
+                                </a>
+                            </li>
+                            <li>
+                                <a class-when-active="active" href="#/approvePhoto" ng-if="role > 1">
+                                    <i class="fa fa-check-square fa-fw"></i> Odobri fotografije
+                                </a>
+                            </li>
+                            <li>
+                                <a class-when-active="active" href="#/approvePhoto" ng-if="role > 1">
+                                    <i class="fa fa-check-square fa-fw"></i> Odobri operatera
+                                </a>
+                            </li>
+                            <li>
+                                <a class-when-active="active" href="#/becomeSeller" ng-if="role == 0">
+                                    <i class="fa fa-edit fa-fw"></i> Postani prodavac
+                                </a>
+                            </li>
+                            <li>
+                                <a class-when-active="active" href="#/rateBuyersPhotos" ng-if="role > 1">
+                                    <i class="fa fa-check fa-fw"></i> Oceni testove
+                                </a>
+                            </li>
+                            <li>
+                                <a class-when-active="active" href="#/searchSellers">
+                                    <i class="fa fa-search fa-fw"></i> Pretrazi prodavce
+                                </a>
+                            </li>
+                            <li>
+                                <a class-when-active="active" href="#/userReport" ng-if="role > 1">
+                                    <i class="fa fa-bars fa-fw"></i> Izvestaji za korisnika
+                                </a>
+                            </li>
+                            <li>
+                                <a class-when-active="active" href="#/categoryReport" ng-if="role > 1">
+                                    <i class="fa fa-bars fa-fw"></i> Izvestaji za kategorije
+                                </a>
+                            </li>
+                            <li>
+                                <a class-when-active="active" href="#/addCard">
+                                    <i class="fa fa-cc-visa fa-fw"></i> Pretraga kartica
+                                </a>
+                            </li>
+                            <li>
+                                <a class-when-active="active" href="#/deactivateUser" ng-if="role > 1">
+                                    <i class="fa fa-minus-circle fa-fw"></i> Deaktiviraj korisnika
+                                </a>
+                            </li>
+                            <li>
+                                <a class-when-active="active" href="#/addUser" ng-if="role > 2">
+                                    <i class="fa fa-plus fa-fw"></i> Dodaj korisnika
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.sidebar-collapse -->
+                </div>
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper" ng-class="{contentNoLeftMargin: isSideBarHidden}">
+            <div ng-view></div>
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+
+    <!-- <div ng-show="isSpinnerVisible">
+        <div class="overlay"></div>
+        <img src="assets/image/spinner.gif" class="spinner">
+    </div> -->
+    <div ng-show="isSplashVisible">
+        <div class="splashOverlay"></div>
+        <!-- <img src="assets/image/splash.gif" class="splash"> -->
+    </div>
+
+    <script src="app/app.js"></script>
+
+    <script src="assets/js/ui-bootstrap-tpls-0.12.0.js"></script>
+
+    <script src="app/appController.js"></script>
+    <script src="app/default/defaultController.js"></script>
+    <script src="components/services/consts.js"></script>
+    <script src="app/login/loginController.js"></script>
+    <script src="app/registration/registrationController.js"></script>
+    <script src="app/photoSearch/photoSearchController.js"></script>
+    <script src="components/services/ngStorage.js"></script>
+    <script src="app/addPhoto/addPhotoController.js"></script>
+    <script src="app/addCategory/addCategoryController.js"></script>
+    <script src="app/cart/cartController.js"></script>
+    <script src="app/approvePhoto/approvePhotoController.js"></script>
+    <script src="app/becomeSeller/becomeSellerController.js"></script>
+    <script src="app/rateBuyersPhotos/rateBuyersPhotosController.js"></script>
+    <script src="app/searchSellers/searchSellersController.js"></script>
+    <script src="app/userReport/userReportController.js"></script>
+    <script src="app/categoryReport/categoryReportController.js"></script>
+    <script src="app/addCard/addCardController.js"></script>
+    <script src="app/deactivateUser/deactivateUserController.js"></script>
+    <script src="app/changePassword/changePasswordController.js"></script>
+    <script src="app/forgotPassword/forgotPasswordController.js"></script>
+    <script src="app/addUser/addUserController.js"></script>
+    <script src="app/companyRegistration/companyRegistrationController.js"></script>
+
+    <script src="components/services/validation.js"></script>
+    <script src="components/services/dialogs/errorDialog/service.js"></script>
+    <script src="components/services/dialogs/buyPhotoDialog/service.js"></script>
+    <script src="components/services/dialogs/msgDialog/service.js"></script>
+    <script src="components/services/httpRequest.js"></script>
+</body>
+
+</html>
